@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-sm-8">
+    <div class="card-header">
+      <label> Select Form Name :
+        <select #formName>
+          <option *ngFor="let form of storedForms">{{form}}</option>
+        </select>
+      </label>
+
+      <button (click)="getForm(formName.value)" class="btn-primary " style="margin:0px 3px 0px 3px">Load Form</button>
+      <button (click)="buildForm(jsonString.value)" class="btn-primary ">Render Form</button>
+    </div>
+  </div>
+  <div class="col-sm-4 ">
+    <p><a href="https://github.com/formio/angular-formio/wiki/Form-Renderer" class="btn btn-primary btn-block"
+        target="_blank"><span class="fa fa-book"></span> Renderer Documentation</a></p>
+  </div>
+</div>
+<label> Or paste your JSON here and hit Render Button :
+  <textarea #jsonString style="height:400px" cols="125"></textarea>
+</label>
+
+<h2>Output
+  <hr>
+</h2>
+<div *ngIf=error>{{error}}</div>
+<formio [form]="form"></formio>
