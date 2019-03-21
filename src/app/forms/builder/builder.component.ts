@@ -23,7 +23,7 @@ export class BuilderComponent implements AfterViewInit {
 
   }
   save(formName){
-    localStorage.setItem(formName, JSON.stringify(this.form, null, 4));
+    localStorage.setItem(formName+".json", JSON.stringify(this.form, null, 4));
   }
 
   

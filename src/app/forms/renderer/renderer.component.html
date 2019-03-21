@@ -2,8 +2,8 @@
   <div class="col-sm-8">
     <div class="card-header">
       <label> Select Form Name :
-        <select #formName>
-          <option *ngFor="let form of storedForms">{{form}}</option>
+        <select #formName style="min-width:200px">
+          <option *ngFor="let form of storedForms" >{{form}}</option>
         </select>
       </label>
 
@@ -16,9 +16,17 @@
         target="_blank"><span class="fa fa-book"></span> Renderer Documentation</a></p>
   </div>
 </div>
-<label> Or paste your JSON here and hit Render Button :
+<label> Or paste your JSON here and hit Render Button : 
   <textarea #jsonString style="height:400px" cols="125"></textarea>
 </label>
+<div class="container card-header" style="padding:10px 10px 10px 10px">
+    <div class="row">
+      <div class="col-10">
+        <label> Form Name :
+          <input type="text" #saveFormName></label></div>
+      <div class="col-2">
+        <button class="btn-primary" (click)="save(saveFormName.value,jsonString.value)">Save Form</button></div>
+    </div>
 
 <h2>Output
   <hr>

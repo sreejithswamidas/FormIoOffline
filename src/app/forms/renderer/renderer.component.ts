@@ -10,7 +10,7 @@ export class RendererComponent implements AfterViewInit {
 
   form:any;
   error:any;
-  storedForms:any[]=[""]
+  storedForms:any[]=[" "]
   
 
   constructor(public prism: PrismService) { }
@@ -20,8 +20,14 @@ export class RendererComponent implements AfterViewInit {
   }
 
   getForm(formName){
-    this.form=JSON.parse(localStorage.getItem(formName));
+    console.log(formName)
+    this.error=null;
+    try {
+      this.form=JSON.parse(localStorage.getItem(formName));
   }
+ catch(e) {
+      this.error=e
+  }}
 
   buildForm(jsonString){
     this.error=null;
@@ -40,6 +46,10 @@ export class RendererComponent implements AfterViewInit {
       if (key.endsWith(".json")){
       this.storedForms[i]=key}
   }
+  }
+  save(saveFormName,jsonString){
+    this.buildForm(jsonString)
+    localStorage.setItem(saveFormName+".json", JSON.stringify(this.form, null, 4));
   }
   
 
