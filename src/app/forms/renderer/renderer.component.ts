@@ -8,10 +8,11 @@ import { PrismService } from '../../Prism.service';
 })
 export class RendererComponent implements AfterViewInit {
 
-  form:any;
-  error:any;
-  storedForms:any[]=[" "]
-  
+  form: any;
+  error: any;
+  storedForms: any[] = [" "]
+  currentFormName: any;
+
 
   constructor(public prism: PrismService) { }
   ngAfterViewInit() {
@@ -19,38 +20,44 @@ export class RendererComponent implements AfterViewInit {
     this.getStoredJson();
   }
 
-  getForm(formName){
-    console.log(formName)
-    this.error=null;
+  getForm(formName) {
+    this.currentFormName = formName
+    this.error = null;
     try {
-      this.form=JSON.parse(localStorage.getItem(formName));
-  }
- catch(e) {
-      this.error=e
-  }}
-
-  buildForm(jsonString){
-    this.error=null;
-    try {
-      this.form=JSON.parse(jsonString);
-  }
- catch(e) {
-      this.error=e
-  }
-    
+      this.form = JSON.parse(localStorage.getItem(formName));
+    }
+    catch (e) {
+      this.error = e
+    }
   }
 
-  getStoredJson(){
-    for(var i=0, len=localStorage.length; i<len; i++) {
+  buildForm(jsonString) {
+    this.error = null;
+    try {
+      this.form = JSON.parse(jsonString);
+    }
+    catch (e) {
+      this.error = e
+    }
+
+  }
+
+  getStoredJson() {
+    for (var i = 0, len = localStorage.length; i < len; i++) {
       var key = localStorage.key(i);
-      if (key.endsWith(".json")){
-      this.storedForms[i]=key}
+      if (key.endsWith(".json")) {
+        this.storedForms[i] = key
+      }
+    }
   }
-  }
-  save(saveFormName,jsonString){
+  save(saveFormName, jsonString) {
     this.buildForm(jsonString)
-    localStorage.setItem(saveFormName+".json", JSON.stringify(this.form, null, 4));
+    if (saveFormName == "") {
+      localStorage.setItem(this.currentFormName, JSON.stringify(this.form, null, 4));
+      return;
+    }
+    localStorage.setItem(saveFormName + ".json", JSON.stringify(this.form, null, 4));
   }
-  
+
 
 }
