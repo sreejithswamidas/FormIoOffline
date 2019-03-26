@@ -20,28 +20,33 @@ export class BuilderComponent &#123;
 &#125;</code></pre>
 <div class="container card-header" style="padding:10px 10px 10px 10px">
   <div class="row">
-    <div class="col-6">
-      <label> Form Name :
-        <input type="text" style="width:190px" #saveFormName></label>
+    <div class="col-4">
+        <input type="text" style="width:190px" placeholder="Enter Form Name" #saveFormName>
       <button class="btn-primary" (click)="save(saveFormName.value)">Save Form</button></div>
-      <div class="col-6">   
-          <label> Select Form Name :
-            <select #formName style="min-width:200px">
-              <option *ngFor="let form of storedForms">{{form}}</option>
-            </select>
-          </label>
-      
-          <button (click)="getForm(formName.value)" class="btn-primary " style="margin:0px 3px 0px 3px">Load Form</button>
-      
-        </div>
+    <div>
+      <label> Select Form Name :
+        <select #formName style="min-width:200px">
+          <option *ngFor="let form of storedForms">{{form}}</option>
+        </select>
+      </label>
+
+      <button (click)="getForm(formName.value)" class="btn-primary " style="margin:0px 3px 0px 3px">Load Form</button>
+      <button (click)="newForm()" class="btn-primary " style="margin:0px 3px 0px 3px">Create New Form</button>
+    </div>
   </div>
-  
+
 
 </div>
 <form-builder [form]="form" (change)="onChange($event)"></form-builder>
-<button (click)="newForm()" class="btn-primary " style="margin:0px 3px 0px 3px">Create New Form</button>
 <hr />
-<h3 class="text-center text-muted">As JSON Schema</h3>
+<div class="row">
+  <div class="col-10">
+    <h3 class="text-center text-muted">As JSON Schema</h3>
+  </div>
+  <div>
+    <p><a *ngIf=currentFormName [href]="fileUrl" [download]=currentFormName class="btn btn-primary">Download JSON</a></p>
+  </div>
+</div>
 <div class="well jsonviewer">
   <pre id="json"><code class="language-json" #json></code></pre>
 </div>

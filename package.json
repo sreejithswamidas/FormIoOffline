@@ -26,6 +26,7 @@
     "bootswatch": "^4.2.1",
     "core-js": "^2.6.2",
     "font-awesome": "^4.7.0",
+    "formio-wizard": "^1.0.0",
     "formiojs": "^3.11.1",
     "jquery": "^3.3.1",
     "prism-themes": "^1.0.1",

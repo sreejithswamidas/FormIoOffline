@@ -1,5 +1,6 @@
 import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { PrismService } from '../../Prism.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-builder',
@@ -12,7 +13,8 @@ export class BuilderComponent implements AfterViewInit {
   public form: Object;
   storedForms:any[]=[" "]
   currentFormName:any;
-  constructor(public prism: PrismService) {
+  fileUrl;
+  constructor(public prism: PrismService,private sanitizer:DomSanitizer) {
     this.form = {
       components: []
     };
@@ -41,8 +43,9 @@ export class BuilderComponent implements AfterViewInit {
 
   getForm(formName){
      this.currentFormName=formName
-     console.log(this.currentFormName)
       this.form=JSON.parse(localStorage.getItem(formName));
+      const blob= new Blob([localStorage.getItem(formName)],{type:'application/json'});
+      this.fileUrl=this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(blob));
   }
 
   getStoredJson(){
@@ -57,4 +60,5 @@ export class BuilderComponent implements AfterViewInit {
       components: []
     };
   }
+  
 }
