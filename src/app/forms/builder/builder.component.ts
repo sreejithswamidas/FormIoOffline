@@ -24,7 +24,8 @@ export class BuilderComponent implements AfterViewInit {
   onChange(event) {
     this.jsonElement.nativeElement.innerHTML = '';
     this.jsonElement.nativeElement.appendChild(document.createTextNode(JSON.stringify(event.form, null, 4)));
-
+    const blob= new Blob([JSON.stringify(event.form, null, 4)],{type:'application/json'});
+    this.fileUrl=this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(blob));
   }
   save(formName: string){
     if(formName==""){
@@ -33,6 +34,7 @@ export class BuilderComponent implements AfterViewInit {
       return;
     }
     localStorage.setItem(formName+".json", JSON.stringify(this.form, null, 4));
+    
   }
 
   
@@ -44,8 +46,8 @@ export class BuilderComponent implements AfterViewInit {
   getForm(formName){
      this.currentFormName=formName
       this.form=JSON.parse(localStorage.getItem(formName));
-      const blob= new Blob([localStorage.getItem(formName)],{type:'application/json'});
-      this.fileUrl=this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(blob));
+      this.jsonElement.nativeElement.appendChild(document.createTextNode(JSON.stringify(this.form, null, 4)));
+     
   }
 
   getStoredJson(){

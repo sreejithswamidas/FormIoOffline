@@ -52,10 +52,6 @@ export class RendererComponent implements AfterViewInit {
   }
   save(saveFormName, jsonString) {
     this.buildForm(jsonString)
-    if (saveFormName == "") {
-      localStorage.setItem(this.currentFormName, JSON.stringify(this.form, null, 4));
-      return;
-    }
     localStorage.setItem(saveFormName + ".json", JSON.stringify(this.form, null, 4));
   }
 
