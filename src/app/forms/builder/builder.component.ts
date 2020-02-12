@@ -26,6 +26,7 @@ export class BuilderComponent implements AfterViewInit {
     this.jsonElement.nativeElement.appendChild(document.createTextNode(JSON.stringify(event.form, null, 4)));
     const blob= new Blob([JSON.stringify(event.form, null, 4)],{type:'application/json'});
     this.fileUrl=this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(blob));
+    this.form=event.form;
   }
   save(formName: string){
     if(formName==""){
