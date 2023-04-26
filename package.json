@@ -27,7 +27,7 @@
     "core-js": "^2.6.2",
     "font-awesome": "^4.7.0",
     "formio-wizard": "^1.0.0",
-    "formiojs": "^4.13.11",
+    "formiojs": "^4.14.13",
     "jquery": "^3.5.0",
     "prism-themes": "^1.0.1",
     "prismjs": "^1.27.0",
